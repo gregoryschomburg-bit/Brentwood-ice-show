@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brentwood Ice Show 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:wght@300;400;600&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+background: #0a1628;
+color: #e8e0d0;
+font-family: ‘Cormorant Garamond’, serif;
+min-height: 100vh;
+overflow-x: hidden;
+}
+
+/* Animated ice/snow background */
+body::before {
+content: ‘’;
+position: fixed;
+inset: 0;
+background:
+radial-gradient(ellipse at 20% 20%, rgba(100,180,255,0.08) 0%, transparent 50%),
+radial-gradient(ellipse at 80% 80%, rgba(180,220,255,0.06) 0%, transparent 50%),
+radial-gradient(ellipse at 50% 50%, rgba(0,30,80,0.9) 0%, #0a1628 100%);
+pointer-events: none;
+z-index: 0;
+}
+
+.snowflakes {
+position: fixed;
+inset: 0;
+pointer-events: none;
+z-index: 0;
+overflow: hidden;
+}
+
+.snowflake {
+position: absolute;
+top: -20px;
+color: rgba(200,230,255,0.3);
+font-size: 1em;
+animation: fall linear infinite;
+}
+
+@keyframes fall {
+to { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+}
+
+.container {
+position: relative;
+z-index: 1;
+max-width: 680px;
+margin: 0 auto;
+padding: 48px 24px 64px;
+}
+
+/* Header */
+.header {
+text-align: center;
+margin-bottom: 48px;
+animation: fadeDown 1s ease both;
+}
+
+@keyframes fadeDown {
+from { opacity: 0; transform: translateY(-20px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+.subtitle {
+font-family: ‘Cinzel’, serif;
+font-size: 0.75rem;
+letter-spacing: 0.35em;
+color: #7ab8f5;
+text-transform: uppercase;
+margin-bottom: 16px;
+}
+
+.title {
+font-family: ‘Playfair Display’, serif;
+font-size: clamp(2.2rem, 6vw, 3.4rem);
+font-weight: 700;
+line-height: 1.1;
+color: #fff;
+text-shadow: 0 0 40px rgba(120,180,255,0.4);
+margin-bottom: 8px;
+}
+
+.title-year {
+font-family: ‘Cinzel’, serif;
+font-size: clamp(1rem, 3vw, 1.4rem);
+color: #7ab8f5;
+letter-spacing: 0.2em;
+font-weight: 400;
+margin-bottom: 24px;
+display: block;
+}
+
+.divider {
+display: flex;
+align-items: center;
+gap: 16px;
+justify-content: center;
+margin: 24px 0;
+}
+
+.divider-line {
+height: 1px;
+width: 80px;
+background: linear-gradient(90deg, transparent, rgba(120,180,255,0.5), transparent);
+}
+
+.divider-icon {
+color: #7ab8f5;
+font-size: 1.2rem;
+}
+
+.theme-tag {
+font-family: ‘Playfair Display’, serif;
+font-style: italic;
+font-size: 1.1rem;
+color: #b8d4f0;
+letter-spacing: 0.05em;
+}
+
+/* Program list */
+.program {
+display: flex;
+flex-direction: column;
+gap: 2px;
+}
+
+.number {
+font-family: ‘Cinzel’, serif;
+font-size: 0.65rem;
+color: rgba(120,180,255,0.5);
+min-width: 28px;
+padding-top: 2px;
+letter-spacing: 0.05em;
+}
+
+/* Section headers */
+.section-header {
+display: flex;
+align-items: center;
+gap: 16px;
+padding: 20px 20px 16px;
+margin: 8px 0 2px;
+background: linear-gradient(135deg, rgba(120,180,255,0.12) 0%, rgba(120,180,255,0.04) 100%);
+border: 1px solid rgba(120,180,255,0.2);
+border-radius: 8px;
+animation: fadeIn 0.8s ease both;
+}
+
+.section-header .number {
+color: #7ab8f5;
+font-size: 0.7rem;
+}
+
+.section-name {
+font-family: ‘Cinzel’, serif;
+font-size: 0.9rem;
+font-weight: 700;
+color: #7ab8f5;
+letter-spacing: 0.12em;
+text-transform: uppercase;
+}
+
+.section-song {
+font-family: ‘Playfair Display’, serif;
+font-style: italic;
+font-size: 0.95rem;
+color: #b8d4f0;
+margin-left: auto;
+white-space: nowrap;
+}
+
+/* Performer rows */
+.performer {
+display: flex;
+align-items: baseline;
+gap: 16px;
+padding: 10px 20px;
+border-radius: 6px;
+transition: background 0.2s, transform 0.2s;
+animation: fadeIn 0.6s ease both;
+cursor: default;
+}
+
+.performer:hover {
+background: rgba(120,180,255,0.06);
+transform: translateX(4px);
+}
+
+.performer-name {
+font-size: 1.05rem;
+font-weight: 300;
+color: #d8cfc0;
+letter-spacing: 0.02em;
+flex: 1;
+}
+
+/* Special rows */
+.intermission {
+display: flex;
+align-items: center;
+gap: 16px;
+padding: 18px 20px;
+margin: 12px 0;
+background: linear-gradient(135deg, rgba(255,200,80,0.1) 0%, rgba(255,160,40,0.05) 100%);
+border: 1px solid rgba(255,200,80,0.25);
+border-radius: 8px;
+animation: fadeIn 0.8s ease both;
+}
+
+.intermission .number { color: rgba(255,200,80,0.6); }
+
+.intermission-label {
+font-family: ‘Cinzel’, serif;
+font-size: 0.85rem;
+letter-spacing: 0.2em;
+color: #ffd070;
+text-transform: uppercase;
+}
+
+/* Freeskate / Final */
+.finale {
+display: flex;
+align-items: center;
+gap: 16px;
+padding: 18px 20px;
+margin: 4px 0;
+background: linear-gradient(135deg, rgba(120,180,255,0.1) 0%, rgba(80,140,220,0.05) 100%);
+border: 1px solid rgba(120,180,255,0.2);
+border-radius: 8px;
+animation: fadeIn 0.8s ease both;
+}
+
+.finale-label {
+font-family: ‘Cinzel’, serif;
+font-size: 0.85rem;
+letter-spacing: 0.12em;
+color: #7ab8f5;
+text-transform: uppercase;
+font-weight: 700;
+}
+
+.finale-song {
+font-family: ‘Playfair Display’, serif;
+font-style: italic;
+color: #b8d4f0;
+margin-left: auto;
+}
+
+@keyframes fadeIn {
+from { opacity: 0; transform: translateX(-8px); }
+to { opacity: 1; transform: translateX(0); }
+}
+
+/* Staggered animation delays */
+.program > *:nth-child(1) { animation-delay: 0.1s; }
+.program > *:nth-child(2) { animation-delay: 0.15s; }
+.program > *:nth-child(3) { animation-delay: 0.2s; }
+.program > *:nth-child(4) { animation-delay: 0.25s; }
+.program > *:nth-child(5) { animation-delay: 0.3s; }
+.program > *:nth-child(6) { animation-delay: 0.35s; }
+.program > *:nth-child(7) { animation-delay: 0.4s; }
+.program > *:nth-child(8) { animation-delay: 0.45s; }
+.program > *:nth-child(9) { animation-delay: 0.5s; }
+.program > *:nth-child(10) { animation-delay: 0.55s; }
+.program > *:nth-child(11) { animation-delay: 0.6s; }
+.program > *:nth-child(n+12) { animation-delay: 0.65s; }
+
+footer {
+text-align: center;
+margin-top: 48px;
+padding-top: 24px;
+border-top: 1px solid rgba(120,180,255,0.15);
+font-family: ‘Cinzel’, serif;
+font-size: 0.65rem;
+letter-spacing: 0.25em;
+color: rgba(120,180,255,0.35);
+text-transform: uppercase;
+animation: fadeIn 1.5s ease both;
+}
+
+/* Ice crystal decorations */
+.crystal {
+position: fixed;
+pointer-events: none;
+opacity: 0.04;
+font-size: 200px;
+color: #7ab8f5;
+z-index: 0;
+}
+.crystal-tl { top: -40px; left: -40px; }
+.crystal-br { bottom: -40px; right: -40px; transform: rotate(180deg); }
+</style>
+
+</head>
+<body>
+
+<div class="snowflakes" id="snowflakes"></div>
+<div class="crystal crystal-tl">❄</div>
+<div class="crystal crystal-br">❄</div>
+
+<div class="container">
+
+  <header class="header">
+    <p class="subtitle">Brentwood Ice Arena Presents</p>
+    <h1 class="title">Back to the 80's<br>on Ice</h1>
+    <span class="title-year">2026</span>
+    <div class="divider">
+      <div class="divider-line"></div>
+      <span class="divider-icon">❄</span>
+      <div class="divider-line"></div>
+    </div>
+    <p class="theme-tag">Program of Performances</p>
+  </header>
+
+  <div class="program">
+
+```
+<!-- Group 1: Adult -->
+<div class="section-header">
+  <span class="number">1</span>
+  <span class="section-name">Adult</span>
+  <span class="section-song">Jungle Rock</span>
+</div>
+
+<div class="performer"><span class="number">2</span><span class="performer-name">Dana Ostrander &amp; Pamela Samson</span></div>
+<div class="performer"><span class="number">3</span><span class="performer-name">Rosa Borrino</span></div>
+<div class="performer"><span class="number">4</span><span class="performer-name">Jennifer Epstein</span></div>
+<div class="performer"><span class="number">5</span><span class="performer-name">Caroline Gustus</span></div>
+<div class="performer"><span class="number">6</span><span class="performer-name">Alice Hildebrandt</span></div>
+
+<!-- Group 2: Basic 2 -->
+<div class="section-header">
+  <span class="number">7</span>
+  <span class="section-name">Basic 2</span>
+  <span class="section-song">Crazy Little Thing Called Love</span>
+</div>
+
+<div class="performer"><span class="number">8</span><span class="performer-name">Madelyn O'Connor</span></div>
+<div class="performer"><span class="number">9</span><span class="performer-name">Charlotte Schomburg</span></div>
+<div class="performer"><span class="number">10</span><span class="performer-name">Evelyn Fussner &amp; Millie Seltzer</span></div>
+<div class="performer"><span class="number">11</span><span class="performer-name">Margo Esses</span></div>
+
+<!-- Group 3: Basic 4/5 -->
+<div class="section-header">
+  <span class="number">12</span>
+  <span class="section-name">Basic 4/5</span>
+  <span class="section-song">Prince</span>
+</div>
+
+<div class="performer"><span class="number">13</span><span class="performer-name">Joselyn Davis</span></div>
+<div class="performer"><span class="number">14</span><span class="performer-name">Evan Steinschriber</span></div>
+<div class="performer"><span class="number">15</span><span class="performer-name">Ava Samson</span></div>
+<div class="performer"><span class="number">16</span><span class="performer-name">Boyen Lin</span></div>
+<div class="performer"><span class="number">17</span><span class="performer-name">Flannery Myles-Williams</span></div>
+
+<!-- Group 4: Basic 1 -->
+<div class="section-header">
+  <span class="number">18</span>
+  <span class="section-name">Basic 1</span>
+  <span class="section-song">Freeze Frame</span>
+</div>
+
+<div class="performer"><span class="number">19</span><span class="performer-name">Charlotte Henden</span></div>
+<div class="performer"><span class="number">20</span><span class="performer-name">Ellie Gardner &amp; Hailey Tipton</span></div>
+
+<!-- Snowplow Sam -->
+<div class="section-header">
+  <span class="number">21</span>
+  <span class="section-name">Snowplow Sam</span>
+  <span class="section-song">Rainbow</span>
+</div>
+
+<!-- Intermission -->
+<div class="intermission">
+  <span class="number">22</span>
+  <span class="intermission-label">✦ Intermission ✦</span>
+</div>
+
+<!-- Post-intermission performers -->
+<div class="performer"><span class="number">23</span><span class="performer-name">Millie Seltzer</span></div>
+<div class="performer"><span class="number">24</span><span class="performer-name">Yiru Chen</span></div>
+<div class="performer"><span class="number">25</span><span class="performer-name">Sophia Berezin</span></div>
+<div class="performer"><span class="number">26</span><span class="performer-name">Kodi Herrera</span></div>
+<div class="performer"><span class="number">27</span><span class="performer-name">Kathleen Grim</span></div>
+<div class="performer"><span class="number">28</span><span class="performer-name">Pat Gregory, Greg Schomburg, Dawn Kattintidt, Heather Hennerich &amp; Stacey Harrington</span></div>
+<div class="performer"><span class="number">29</span><span class="performer-name">Ava Samson &amp; Charlotte Schomburg</span></div>
+
+<!-- Basic 3 -->
+<div class="section-header">
+  <span class="number">30</span>
+  <span class="section-name">Basic 3</span>
+  <span class="section-song">Fame</span>
+</div>
+
+<div class="performer"><span class="number">31</span><span class="performer-name">Oliver Mudd</span></div>
+<div class="performer"><span class="number">32</span><span class="performer-name">Pamela Samson</span></div>
+<div class="performer"><span class="number">33</span><span class="performer-name">Margo Schwamp</span></div>
+<div class="performer"><span class="number">34</span><span class="performer-name">Heather Hennerich</span></div>
+<div class="performer"><span class="number">35</span><span class="performer-name">Erin &amp; Mave Insler</span></div>
+<div class="performer"><span class="number">36</span><span class="performer-name">Blair Kersting</span></div>
+<div class="performer"><span class="number">37</span><span class="performer-name">Ellie Childrey</span></div>
+<div class="performer"><span class="number">38</span><span class="performer-name">Lake Schultz</span></div>
+<div class="performer"><span class="number">39</span><span class="performer-name">Jane Hoffman</span></div>
+<div class="performer"><span class="number">40</span><span class="performer-name">Becky Cacioppo &amp; Kathleen Grim</span></div>
+
+<!-- Freeskate -->
+<div class="finale">
+  <span class="number">41</span>
+  <span class="finale-label">Freeskate</span>
+  <span class="finale-song">MJ</span>
+</div>
+
+<!-- Final Bows -->
+<div class="finale">
+  <span class="number">42</span>
+  <span class="finale-label">Final Bows &amp; Photo Ops</span>
+</div>
+```
+
+  </div>
+
+  <footer>❄ &nbsp; Brentwood Ice Show 2026 &nbsp; ❄</footer>
+
+</div>
+
+<script>
+  // Generate gentle snowflakes
+  const container = document.getElementById('snowflakes');
+  for (let i = 0; i < 18; i++) {
+    const flake = document.createElement('div');
+    flake.className = 'snowflake';
+    flake.textContent = ['❄','❅','❆'][Math.floor(Math.random()*3)];
+    flake.style.left = Math.random() * 100 + 'vw';
+    flake.style.fontSize = (0.6 + Math.random() * 1.2) + 'em';
+    flake.style.animationDuration = (8 + Math.random() * 14) + 's';
+    flake.style.animationDelay = (Math.random() * 12) + 's';
+    flake.style.opacity = (0.1 + Math.random() * 0.25);
+    container.appendChild(flake);
+  }
+</script>
+
+</body>
+</html>
